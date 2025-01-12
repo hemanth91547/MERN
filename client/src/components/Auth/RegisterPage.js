@@ -1,27 +1,32 @@
-// src/components/Auth/RegisterPage.js
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("User"); // Default to "User"
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // Use useNavigate hook
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      const endpoint =
+        role === "Admin"
+          ? "http://localhost:5023/api/admin/register"
+          : "http://localhost:5023/api/auth/register";
+
+      await axios.post(endpoint, {
         username,
         email,
         password,
       });
-      navigate("/login"); // Use navigate to redirect after successful registration
+      navigate("/login"); // Redirect after successful registration
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.error);  // Display the error from the backend
+        setError(err.response.data.error); // Display error from the backend
       } else {
         setError("Error creating account."); // Fallback error message
       }
@@ -53,6 +58,26 @@ const RegisterPage = () => {
           placeholder="Password"
           required
         />
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="User"
+              checked={role === "User"}
+              onChange={() => setRole("User")}
+            />
+            User
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Admin"
+              checked={role === "Admin"}
+              onChange={() => setRole("Admin")}
+            />
+            Admin
+          </label>
+        </div>
         <button type="submit">Register</button>
       </form>
       {error && <p>{error}</p>}

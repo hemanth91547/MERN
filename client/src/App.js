@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./components/Auth/LoginPage";
 import RegisterPage from "./components/Auth/RegisterPage";
 import ProfilePage from "./components/Auth/ProfilePage";
+import AdminDetailsPage from "./components/Auth/AdminDetailsPage";
 import ResourceManagementPage from "./components/ResourceManagementPage";
 import { AuthProvider } from "./context/AuthContext";
 
@@ -22,6 +23,7 @@ function App() {
          
           <Route path="/profile" element={<ProfilePage />} />
           
+          <Route path="/admin-details" element={<AdminDetailsPage />} />
           <Route path="/resources" element={<ResourceManagementPage />} />
           
         </Routes>

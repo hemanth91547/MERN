@@ -1,21 +1,35 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate hook instead of useHistory
-import axios from 'axios';
+// src/components/Auth/LoginForm.js
+
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate(); // Updated from useHistory to useNavigate
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("User"); // Default to "User"
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-      localStorage.setItem('token', res.data.token); // Store JWT token
-      navigate('/profile'); // Updated to use navigate instead of history.push
+      const endpoint =
+        role === "Admin"
+          ? "http://localhost:5023/api/admin/login"
+          : "http://localhost:5023/api/auth/login";
+
+      const res = await axios.post(endpoint, { email, password });
+      localStorage.setItem("token", res.data.token); // Store JWT token
+
+      // Determine if user is admin or regular user
+      if (res.data.admin) {
+        navigate("/admin-details"); // Redirect to admin details page
+      } else {
+        navigate("/profile"); // Redirect to user profile page
+      }
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed'); // Added fallback for error message
+      setError(err.response?.data?.error || "Login failed"); // Added fallback for error message
     }
   };
 
@@ -38,6 +52,26 @@ const LoginForm = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="User"
+              checked={role === "User"}
+              onChange={() => setRole("User")}
+            />
+            User
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Admin"
+              checked={role === "Admin"}
+              onChange={() => setRole("Admin")}
+            />
+            Admin
+          </label>
+        </div>
         <button type="submit">Login</button>
       </form>
       <p>

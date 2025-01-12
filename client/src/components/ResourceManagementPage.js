@@ -9,7 +9,7 @@ const ResourceManagementPage = () => {
   const fetchResources = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get("http://localhost:5000/api/resources", {
+      const response = await axios.get("http://localhost:5023/api/resources", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setResources(response.data);
@@ -22,7 +22,7 @@ const ResourceManagementPage = () => {
     const token = localStorage.getItem("token");
     try {
       await axios.post(
-        "http://localhost:5000/api/resources",
+        "http://localhost:5023/api/resources",
         newResource,
         {
           headers: { Authorization: `Bearer ${token}` },
