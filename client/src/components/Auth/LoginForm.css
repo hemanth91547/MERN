@@ -1,0 +1,118 @@
+/* General Page Styles */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height for centering */
+    background-color: #f8f9fa; /* Light background color */
+    margin: 0;
+  }
+  
+  /* Container Styles */
+  .login-container {
+    width: 100%;
+    max-width: 400px; /* Maximum width for responsiveness */
+    padding: 30px;
+    border: 1px solid #ccc; /* Border around the container */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    text-align: center; /* Center text inside the container */
+  }
+  
+  /* Title */
+  .login-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333; /* Darker text color */
+  }
+  
+  /* Form Styles */
+  .login-form {
+    display: flex;
+    flex-direction: column; /* Stack fields vertically */
+    gap: 15px; /* Space between fields */
+  }
+  
+  /* Input Fields */
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .form-input:focus {
+    border-color: #007bff; /* Blue border on focus */
+  }
+  
+  /* Role Selection */
+  .role-selection {
+    display: flex;
+    justify-content: space-around; /* Space out radio buttons */
+  }
+  
+  .role-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1rem;
+  }
+  
+  /* Submit Button */
+  .submit-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: #007bff; /* Blue background for button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .submit-button:hover {
+    background: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Error Message */
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+  
+  /* Register Link */
+  .register-link {
+    margin-top: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .register-link a {
+    color: #007bff; /* Blue link color */
+    text-decoration: none;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .login-container {
+      padding: 20px;
+    }
+  
+    .form-input {
+      font-size: 0.9rem;
+    }
+  
+    .submit-button {
+      font-size: 0.9rem;
+    }
+  }
+  

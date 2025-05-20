@@ -1,10 +1,11 @@
+// routes/admin-auth.js
+
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Admin = require("../models/Admin");
 
-// Middleware for authenticating Admin token
 const authenticateAdminToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(" ")[1];
@@ -81,5 +82,13 @@ router.get("/profile", authenticateAdminToken, async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
+router.delete("/logout", (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.status(401).json({ error: "Unauthorized" });
+  // Add logic to remove admin details if needed
+  res.status(200).json({ message: "Logout successful" });
+});
+
 
 module.exports = router;

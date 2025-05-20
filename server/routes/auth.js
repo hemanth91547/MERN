@@ -1,3 +1,5 @@
+// routes/auth.js
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -91,5 +93,13 @@ router.get("/profile", authenticateToken, async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
+router.delete("/logout", (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.status(401).json({ error: "Unauthorized" });
+  // Add logic to remove user details if needed
+  res.status(200).json({ message: "Logout successful" });
+});
+
 
 module.exports = router;

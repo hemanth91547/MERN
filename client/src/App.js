@@ -1,7 +1,10 @@
+// App.js
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./components/Auth/LoginPage";
 import RegisterPage from "./components/Auth/RegisterPage";
+
 import ProfilePage from "./components/Auth/ProfilePage";
 import AdminDetailsPage from "./components/Auth/AdminDetailsPage";
 import ResourceManagementPage from "./components/ResourceManagementPage";
@@ -11,6 +14,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+      
         <Routes>
 
         <Route path="/" element={<LoginPage />} />

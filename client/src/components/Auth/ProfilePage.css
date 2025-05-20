@@ -1,0 +1,115 @@
+/* General Page Styles */
+.profile-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height for vertical centering */
+    background-color: #f7f9fc; /* Soft blue-gray background */
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Container Styles */
+  .profile-container {
+    width: 100%;
+    max-width: 500px; /* Restrict max width for responsiveness */
+    padding: 20px 30px;
+    background-color: #fff; /* White container background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center; /* Center-align text content */
+  }
+  
+  /* Title Styling */
+  .profile-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333; /* Dark text for title */
+  }
+  
+  /* Profile Details */
+  .profile-details {
+    display: flex;
+    flex-direction: column; /* Stack details vertically */
+    gap: 10px; /* Space between items */
+  }
+  
+  .profile-info {
+    font-size: 1.2rem;
+    color: #555; /* Neutral text color */
+  }
+  
+  .profile-info strong {
+    color: #000; /* Darker color for labels */
+  }
+  
+  /* Loading Text */
+  .loading-text {
+    font-size: 1rem;
+    color: #888; /* Subtle loading text color */
+  }
+
+  .logout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .logout-button:active {
+    background-color: #003f7f; /* Even darker blue when pressed */
+  }
+
+  .resource-manager-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745; /* Green background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 10px; /* Space between buttons */
+    transition: background-color 0.3s ease;
+  }
+  
+  .resource-manager-button:hover {
+    background-color: #218838; /* Darker green on hover */
+  }
+  
+  .resource-manager-button:active {
+    background-color: #19692c; /* Even darker green when pressed */
+  }
+  
+  
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .profile-container {
+      padding: 15px 20px; /* Adjust padding for smaller screens */
+    }
+  
+    .profile-title {
+      font-size: 1.6rem; /* Slightly smaller title font */
+    }
+  
+    .profile-info {
+      font-size: 1rem; /* Adjust details font size */
+    }
+  
+    .loading-text {
+      font-size: 0.9rem; /* Reduce font size for loading text */
+    }
+  }
+  

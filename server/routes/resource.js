@@ -1,54 +1,41 @@
 const express = require("express");
-const Resource = require("../models/Resource");
-const authMiddleware = require("../middleware/authMiddleware");
-const roleMiddleware = require("../middleware/roleMiddleware");
+const Resource = require("../models/Resource"); // Adjust path if needed
 
 const router = express.Router();
 
-// Create a new resource
-router.post("/", authMiddleware, async (req, res) => {
-  const { title, content } = req.body;
+// Example of a route that requires authorization
+router.post("/create", async (req, res) => {
   try {
-    const resource = await Resource.create({ title, content, owner: req.user._id });
-    res.status(201).json(resource);
+    // Log the incoming data for debugging purposes
+    console.log("Received new resource data:", req.body);
+
+    // Make sure the user is authenticated before proceeding
+    if (!req.user) {
+      return res.status(401).json({ error: "User not authenticated" });
+    }
+
+    const newResource = new Resource({
+      title: req.body.title,
+      content: req.body.content,
+      createdBy: req.user._id, // Using the user _id from the decoded token
+    });
+
+    // Save the resource to the database
+    await newResource.save();
+    res.status(201).json(newResource);
   } catch (error) {
-    res.status(500).json({ error: "Server error" });
+    console.error("Error creating resource:", error);
+    res.status(500).json({ error: "Error creating resource" });
   }
 });
 
-// Get all resources for a user
-router.get("/", authMiddleware, async (req, res) => {
+router.get("/all", async (req, res) => {
   try {
-    const resources = await Resource.find({ owner: req.user._id });
-    res.status(200).json(resources);
+    const resources = await Resource.find({ createdBy: req.user._id }); // Get resources for the authenticated user
+    res.json(resources);
   } catch (error) {
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
-// Update a resource
-router.put("/:id", authMiddleware, async (req, res) => {
-  try {
-    const resource = await Resource.findOneAndUpdate(
-      { _id: req.params.id, owner: req.user._id },
-      req.body,
-      { new: true }
-    );
-    if (!resource) return res.status(404).json({ error: "Resource not found" });
-    res.status(200).json(resource);
-  } catch (error) {
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
-// Delete a resource (Admin-only)
-router.delete("/:id", authMiddleware, roleMiddleware(["Admin"]), async (req, res) => {
-  try {
-    const resource = await Resource.findByIdAndDelete(req.params.id);
-    if (!resource) return res.status(404).json({ error: "Resource not found" });
-    res.status(200).json({ message: "Resource deleted" });
-  } catch (error) {
-    res.status(500).json({ error: "Server error" });
+    console.error("Error fetching resources:", error);
+    res.status(500).json({ error: "Error fetching resources" });
   }
 });
 

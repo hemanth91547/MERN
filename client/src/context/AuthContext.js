@@ -1,3 +1,5 @@
+//src/context/AuthContext
+
 import React, { createContext, useContext, useState } from 'react';
 
 // Create the context
